@@ -6,5 +6,6 @@ setup(
     author="Matan Merom",
     description=("A demonstration of how to load an AAS file and print the dialogue texts to the screen on the right "
                  "time."),
+    requires=['win-unicode-console'],
     packages=find_packages(),
 )

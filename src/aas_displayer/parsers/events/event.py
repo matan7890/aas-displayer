@@ -2,6 +2,8 @@ class Event(object):
     """
     This class represents a base for any event line
     """
+    _TYPE = None
+
     def __init__(self, marked, start, end, style, name, margin_l, margin_r, margin_v, effect, text, **kwargs):
         self.marked = marked
         self.start = start
@@ -27,3 +29,6 @@ class Event(object):
     @staticmethod
     def should_display():
         return False
+
+    def __str__(self):
+        return unicode("{type}: start: {}, end: {}, text: {}").format(self._TYPE, self.start, self.end, self.text)
