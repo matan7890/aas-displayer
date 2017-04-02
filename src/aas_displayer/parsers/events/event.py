@@ -1,18 +1,20 @@
 from __future__ import print_function, unicode_literals
 
-from aas_displayer.utils.aas_time import AASTime
+import abc
+
+from aas_displayer.utils.aas_time import AASTime, AAS_TIME_SEPARATOR
 
 
 class Event(object):
     """
-    This class represents a base for any event line
+    This class represents a base for any event line in an AAS file.
     """
-    _TYPE = None
+    __metaclass__ = abc.ABCMeta
+    _TYPE = NotImplemented  # type: str
 
-    def __init__(self, marked, start, end, style, name, margin_l, margin_r, margin_v, effect, text, **kwargs):
-        self.marked = marked
-        self.start = AASTime(start)
-        self.end = AASTime(end)
+    def __init__(self, start="", end="", style="", name="", margin_l=0, margin_r=0, margin_v=0, effect="", text="", **kwargs):
+        self.start = AASTime(*start.split(AAS_TIME_SEPARATOR))
+        self.end = AASTime(*end.split(AAS_TIME_SEPARATOR))
         self.style = style
         self.name = name
         self.margin_l = margin_l
