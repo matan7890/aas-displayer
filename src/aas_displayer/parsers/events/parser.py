@@ -34,7 +34,7 @@ class EventParser(BaseSectionParser):
         for event_type in Event.__subclasses__():
             event_fields = self._match_fields(line_fields)
             if event_type._TYPE.lower() == line_type.lower():
-                return event_type(**event_fields)
+                return event_type(line, **event_fields)
         raise ValueError("Unknown type of event: {type} in the line: {line}".format(type=line_type, line=line))
 
     @staticmethod
