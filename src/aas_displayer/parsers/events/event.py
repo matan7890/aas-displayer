@@ -26,13 +26,6 @@ class Event(object):
             raise ValueError("You can't finish an event before starting it! (starting time: {} > ending time: {}"
                              .format(self.start, self.end))
 
-    def amount(self):
-        """
-        :return: the amount of time passed between start time and end time, in seconds (assumes both are in seconds)
-        :rtype: float
-        """
-        return self.end - self.start
-
     @staticmethod
     def should_display():
         return False
@@ -41,4 +34,4 @@ class Event(object):
         print(self)
 
     def __str__(self):
-        return "{}: start: {}, end: {}, text: {}".format(self._TYPE, self.start, self.end, self.text)
+        return "{}: start: {}, end: {}, text: {}".format(self._TYPE, self.start.isoformat(), self.end.isoformat(), self.text)
