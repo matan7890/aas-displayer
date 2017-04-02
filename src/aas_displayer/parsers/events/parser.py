@@ -3,7 +3,7 @@ from aas_displayer.parsers.sections.base_section import BaseSectionParser
 
 TYPE_SEPARATOR = ":"
 
-FIELDS_SEPARATOR = ", "
+FIELDS_SEPARATOR = ","
 
 
 class EventParser(BaseSectionParser):
@@ -19,7 +19,7 @@ class EventParser(BaseSectionParser):
         if field_type != "Format":
             raise ValueError("A format line of the Event section should start with the string \"Format: \"!"
                              "\nLine: {line}".format(line=format_line))
-        self.format_fields = format_fields
+        self.format_fields = map(lambda s: s.lower().strip(), format_fields)
 
     def parse(self, line):
         """
@@ -31,10 +31,10 @@ class EventParser(BaseSectionParser):
 
         """
         line_type, line_fields = self._parse_line(line)
-        for event_parser in Event.__subclasses__():
+        for event_type in Event.__subclasses__():
             event_fields = self._match_fields(line_fields)
-            if event_parser._TYPE.lower() == line_type.lower():
-                return event_parser(**event_fields)
+            if event_type._TYPE.lower() == line_type.lower():
+                return event_type(**event_fields)
         raise ValueError("Unknown type of event: {type} in the line: {line}".format(type=line_type, line=line))
 
     @staticmethod
