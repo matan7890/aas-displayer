@@ -10,6 +10,9 @@ class MetaSectionParser(type):
 
 
 class BaseSectionParser(object):
+    """
+    This class can be used in the future for parsing all the sections of the AAS file. 
+    """
     __metaclass__ = MetaSectionParser
 
     SECTION_NAME = NotImplemented
