@@ -9,8 +9,8 @@ class AASTime(dt.time):
         if "." not in seconds:
             seconds = seconds + ".00"
         seconds = float(seconds)
-        # If seconds were 12.34 for example, they will become "1234" and then 34 will be taken:
-        hundredths = float(str(seconds * 100)[2:])
+        # If seconds were 12.34 for example, they will become 1234 - 1200 = 34
+        hundredths = float(seconds) * 100 - int(float(seconds)) * 100
         cls.hundredth = hundredths
         return super(AASTime, cls).__new__(cls, *map(int, [hours, minutes, seconds, hundredths * 10000]))
 
