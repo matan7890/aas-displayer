@@ -12,7 +12,13 @@ class AASTime(dt.time):
         # If seconds were 12.34 for example, they will become "1234" and then 34 will be taken:
         hundredths = float(str(seconds * 100)[2:])
         cls.hundredth = hundredths
-        super(AASTime, cls).__new__(cls, *map(int, [hours, minutes, seconds, hundredths * 10000]))
+        return super(AASTime, cls).__new__(cls, *map(int, [hours, minutes, seconds, hundredths * 10000]))
+
+    def to_milliseconds(self):
+        return self.to_seconds() * 1000
+
+    def to_seconds(self):
+        return float(self.hour) * 60 * 60 + float(self.minute) * 60 + self.second + float(self.hundredth) / 100
 
     def __str__(self):
         return "{}:{}:{}:{}".format(*map(_fill_number, (self.hour, self.minute, self.second, self.hundredth)))
