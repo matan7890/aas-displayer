@@ -1,0 +1,5 @@
+EVENTS = "Events"
+SCRIPT_INFO = "Script Info"
+STYLES = "v4 Styles"
+FONTS = "Fonts"
+ALL_SECTIONS = [EVENTS, SCRIPT_INFO, STYLES, FONTS]
