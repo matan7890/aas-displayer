@@ -2,4 +2,4 @@ from aas_displayer.parsers.events.event import Event
 
 
 class Comment(Event):
-    TYPE = "COMMENT"
+    _TYPE = "COMMENT"
